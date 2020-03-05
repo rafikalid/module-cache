@@ -30,7 +30,7 @@
     "gulp-util": "^3.0.8"
   },
   "dependencies": {
-    "lru-ttl-cache": "^1.1.1",
+    "lru-ttl-cache": "^1.1.2",
     "mz": "^2.7.0"
   }
 }
