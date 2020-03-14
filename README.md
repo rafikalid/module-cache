@@ -9,6 +9,11 @@ The module support LRU (Least Recently Used) and TTL (Time To Live) to remove mo
 
 Works on NodeJS version >= 12.
 
+## Installation
+```
+npm i -S module-cache
+```
+
 ## Why to use:
 
 - Fast: Do not use "require" to load modules

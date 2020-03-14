@@ -1,6 +1,6 @@
 {
   "name": "module-cache",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "load temporary modules to the memory",
   "main": "build/index.js",
   "scripts": {

@@ -39,14 +39,18 @@ module.exports= class ModuleCache extends LRU_TTL
 	require: (filePath)-> @get(filePath)
 	get: (filePath)->
 		filePath= Path.resolve filePath
-		buffer= await MzFs.readFile filePath
-		@_get filePath, buffer
+		unless data= super.get filePath
+			buffer= await MzFs.readFile filePath
+			data= @_get filePath, buffer
+		return data
 
 	requireSync: (filePath)-> @getSync(filePath)
 	getSync: (filePath)->
 		filePath= Path.resolve filePath
-		buffer= await fs.readFileSync filePath
-		@_get filePath, buffer
+		unless data= super.get filePath
+			buffer= Fs.readFileSync filePath
+			data= @_get filePath, buffer
+		return data
 
 	_get: (filePath, buffer)->
 		data= buffer.toString('utf8')
@@ -62,12 +66,12 @@ module.exports= class ModuleCache extends LRU_TTL
 					exports: mod.exports
 					require: require
 					__filename: filePath
-					__dirname: Path.direname(filePath)
+					__dirname: Path.dirname(filePath)
 
 				Vm.runInContext data, (Vm.createContext ctx),
 					filename:	filePath
 					timeout:	@_timeout
-				data= ctx.exports
+				data= ctx.module.exports
 			else
 				throw new Error "Unsupported file: #{filePath}"
 		# save file to cache
