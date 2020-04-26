@@ -92,7 +92,8 @@ cache.setConfiguration(options);
 const options= {
 	/**
 	 * Set the maximum entries in the cache for the LRU algorithm
-	 * remove the least used element when this is exceeded
+	 * Removes the least used element when this is exceeded
+	 * Set to "0" to disable this cache (Example: for development mode)
 	 * @default  Infinity
 	 */
 	max: Infinity,
